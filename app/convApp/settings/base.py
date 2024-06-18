@@ -24,7 +24,12 @@ BASE_APPS = [
 ]
 
 LOCAL_APPS = [
-    'apps.core',
+    'apps.alerts',
+    'apps.graphics',
+    'apps.lectures',
+    'apps.reports',
+    'apps.sensors',
+    'apps.users',
 ]
 
 THIRTY_APPS = [
