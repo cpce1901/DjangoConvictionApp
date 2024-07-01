@@ -1,14 +1,12 @@
 import os
-from dotenv import load_dotenv
+from .top_secret import secret
 from pathlib import Path
 
-load_dotenv()
-
-DB_NAME = os.getenv("DB_NAME")
-DB_USER = os.getenv("DB_USER")
-DB_PASS = os.getenv("DB_PASS")
-DB_HOST = os.getenv("DB_HOST")
-DB_PORT = os.getenv("DB_PORT")
+DB_NAME = secret.get("DB_NAME")
+DB_USER = secret.get("DB_USER")
+DB_PASS = secret.get("DB_PASS")
+DB_HOST = secret.get("DB_HOST")
+DB_PORT = secret.get("DB_PORT")
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -95,3 +93,5 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'users.User'

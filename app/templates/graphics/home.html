@@ -1,0 +1,36 @@
+<!-- Herencia desde base -->
+{% extends 'base/base.html' %}
+
+<!-- Carga de archivos estaticos -->
+{% load static %}
+
+<!-- Titulo de pagina -->
+{% block title %}
+Dashboard - DEMO | Cloud Manager | Conviction
+{% endblock title %}
+
+<!-- Bloque JS -->
+{% block script %}
+
+{% endblock script %}
+
+<!-- Bloque de contenido -->
+{% block content %}
+
+{% include 'base/nav.html' %}
+
+<main class="container-fluid mx-auto">
+
+    <section class="absolute left-1/2 top-[10%] transform -translate-x-1/2">
+        <div>
+            <h1 class="text-4xl text-center text-black text-exo xl:text-6xl">clou<span
+                    class="text-green-500 text-rale">DM</span>anager - Demo</h1>
+        </div>
+    </section>
+
+    
+
+
+</main>
+
+{% endblock content %}

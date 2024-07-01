@@ -1,0 +1,102 @@
+<!-- Herencia desde base -->
+{% extends 'base/base.html' %}
+
+<!-- Carga de archivos estaticos -->
+{% load static %}
+
+<!-- Titulo de pagina -->
+{% block title %}
+Login | Conviction | App
+{% endblock title %}
+
+<!-- Bloque JS -->
+{% block script %}{% endblock script %}
+
+<!-- Bloque de contenido -->
+{% block content %}
+
+<main>
+
+    <section class="w-full h-screen overflow-hidden relative flex justify-center items-center">
+        <div class="absolute inset-0 bg-login w-full h-full bg-cover bg-no-repeat bg-bottom bg-fixed animated-zoom">
+        </div>
+        <div class="absolute inset-0 bg-slate-800 bg-opacity-60"></div>
+        <div class="relative w-full h-full flex flex-col justify-center items-center gap-10 md:gap-4 xl:gap-12">
+
+            <div>
+                <h1 class="text-4xl text-white text-exo xl:text-6xl">clou<span class="text-green-500 text-rale">DM</span>anager</h1>
+            </div>
+
+            <div class="bg-slate-800 bg-opacity-60 w-10/12 h-3/6 md:w-7/12 xl:w-4/12 xl:h-3/6 md:h-auto rounded-md shadow-2xl shadow-slate-600/60">
+                <form action="{% url 'users_app:login' %}" method="post"
+                    class="w-full h-full p-4 flex flex-col justify-around items-center md:gap-10 xl:gap-4">
+                    {% csrf_token %}
+                    <div class="xl:w-8/12 w-10/12 flex flex-col gap-8">
+                        <div class="flex flex-col gap-1">
+                            <label class="font-exo text-base font-semibold text-white">{{ form.email.label}}</label>
+                            {{ form.email }}
+                        </div>                        
+                            
+                        <div class="flex flex-col gap-1">
+                            <label class="font-exo text-base font-semibold text-white">{{ form.password.label}}</label>
+                            {{ form.password }}
+                        </div>                        
+                    </div>
+
+                    <button class="outline outline-1 outline-gray-100 py-3 px-10 bg-rose-500 text-white hover:bg-rose-100 hover:text-rose-500 hover:outline-rose-500 transition-all duration-300"
+                        type="submit">Ingresar</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <div>
+        {% if messages %}
+
+        {% for message in messages %}
+
+        {% if message.tags == "success" %}
+
+        <script>
+            Swal.fire({
+                title: 'Éxito',
+                text: '{{ message }}',
+                icon: 'success',
+                confirmButtonText: 'Cerrar'
+            });
+        </script>
+
+        {% elif message.tags == "error" %}
+
+        <script>
+            Swal.fire({
+                title: 'Error',
+                text: '{{ message }}',
+                icon: 'error',
+                confirmButtonText: 'Cerrar'
+            });
+        </script>
+
+        {% elif message.tags == "info" %}
+
+        <script>
+            Swal.fire({
+                title: 'Exito',
+                text: '{{ message }}',
+                icon: 'info',
+                confirmButtonText: 'Cerrar'
+            });
+        </script>
+
+        {% endif %}
+
+        {% endfor %}
+
+        {% endif %}
+
+    </div>
+
+
+</main>
+
+{% endblock content %}

@@ -1,0 +1,58 @@
+<header class="bg-white ">
+    <!-- Menu principal -->
+    <nav class="z-20 bg-gray-800 fixed w-full">
+        <div class="p-4 container mx-auto ">
+            <div class="flex justify-between">
+
+                <!-- Imagen/logo -->
+                <div class="self-center">
+                    <a href="" title="Volver a electricista"
+                        class="font-exo font-normal text-xm md:text-xl text-white">clou<span class="text-green-600">DM</span>manager</a>
+                </div>
+
+                <!-- Cuerpo de menu -->
+                <div class="">
+
+                    <!-- Boton responsive -->
+                    <input type="checkbox" name="hamburger" id="hamburger" class="peer" hidden>
+
+                    <label for="hamburger"
+                        class="peer-checked:hamburger block z-20 cursor-pointer transition p-1.5 hover:bg-gray-200 rounded">
+                        <div class="h-0.5 w-[18px] bg-white transition"></div>
+                        <div class="mt-[0.3rem] h-0.5 w-[18px] bg-white transition"></div>
+                        <div class="mt-[0.3rem] h-0.5 w-[18px] bg-white transition"></div>
+                    </label>
+
+
+                    <!-- Cuerpo de los enlaces -->
+                    <div
+                        class="z-20 w-8/12 md:w-4/12 lg:2/12 xl:w-2/12 bg-white flex flex-col justify-between fixed inset-0 translate-x-[-100%] shadow-lg peer-checked:translate-x-0 peer-checked:duration-500 transition">
+
+                        <!-- Enlaces -->
+                        <div class="px-6 pt-32 flex flex-col gap-3 ">
+                            <a href="#" title="Navegar a electricista"
+                                class="{% if request.path == '/' %}md:font-bold font-medium{% else %}md:font-light hover:font-medium font-light{% endif %} tracking-wide cursor-pointer px-3 py-2 rounded  text-lg text-slate-800   transition-all duration-300 ">Dashboard</a>
+                            <a href="{% url 'sensors_app:locates' %}" title="Navegar a nosotros"
+                                class="{% if request.path == '/nosotros/' %}md:font-bold font-medium{% else %}md:font-light hover:font-medium font-light{% endif %} tracking-wide cursor-pointer px-3 py-2 rounded  text-lg text-slate-800   transition-all duration-300">Sensores</a>
+                            <a href="#" title="Navegar a servicios"
+                                class="{% if request.path == '/servicios/' %}md:font-bold font-medium{% else %}md:font-light hover:font-medium font-light{% endif %} tracking-wide cursor-pointer px-3 py-2 rounded  text-lg text-slate-800   transition-all duration-300">Reportes</a>
+                            <a href="#" title="Navegar a contacto"
+                                class="{% if request.path == '/contacto/' %}md:font-bold font-medium{% else %} hover:font-medium font-light{% endif %} tracking-wide cursor-pointer px-3 py-2 rounded  text-lg text-slate-800   transition-all duration-300">Alertas</a>
+                            <a href="#" title="Navegar a contacto"
+                                class="{% if request.path == '/contacto/' %}md:font-bold font-medium{% else %} hover:font-medium font-light{% endif %} tracking-wide cursor-pointer px-3 py-2 rounded  text-lg text-slate-800   transition-all duration-300">Perfil</a>
+                        </div>
+
+                        <!-- Boton -->
+                        <div class="flex flex-col gap-5 border-t py-8 px-6">
+
+                            <a href="{% url 'users_app:logout' %}"
+                                class="block px-6 py-2 rounded text-center text-white text-lg font-semibold transition bg-blue-500 hover:bg-blue-600">Salir</a>
+                        </div>
+                    </div>
+                    <!-- Fondo oscuro -->
+                    <div class="fixed inset-0 peer-checked:bg-black z-10 peer-checked:opacity-50 transition-all duration-150 pointer-events-none"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
