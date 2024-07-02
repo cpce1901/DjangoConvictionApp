@@ -53,7 +53,8 @@ class Located(models.Model):
 
 
 class Sensor(models.Model):
-    code = models.CharField("Codigo",max_length=32, unique=True, blank=True, db_index=True)
+    code = models.CharField("Codigo", max_length=32, unique=True, blank=True, db_index=True)
+    topic = models.CharField("Topico", max_length=64, null=True, blank=True)
     device = models.ForeignKey(Device, on_delete=models.CASCADE, verbose_name="Equipo", related_name="sensor_device")
     located = models.ForeignKey(Located, on_delete=models.CASCADE,verbose_name="Ubicación",related_name="sensor_located")
     detail = models.CharField("Detalle", max_length=256, blank=True)

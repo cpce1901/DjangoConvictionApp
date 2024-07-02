@@ -7,30 +7,145 @@ Sensores - DEMO | Cloud Manager | Conviction
 {% endblock title %}
 
 {% block script %}
-<!-- Puedes agregar scripts adicionales aquí si es necesario -->
+<script src="{% static 'js/wsMqtt.js' %}"></script>
 {% endblock script %}
 
 {% block content %}
 
 {% include 'base/nav.html' %}
 
-<main class="h-screen container mx-auto py-10 px-4 lg:px-0">
-    <section class="flex justify-center pt-10">
+<main class="h-screen container mx-auto pt-28">
+    <section class="flex justify-center">
         <div>
-            <h1 class="text-center text-black font-exo xl:text-4xl">
+            <h1 class="text-center text-black font-exo text-6xl mb-2">
                 clou<span class="text-green-500 font-rale">DM</span>anager - Demo
             </h1>
-            <p class="text-center text-black text-xl">{{ enterprise.name }} - {{ locate }} - {{ sensor }}</p>
+            <p class="text-center text-black text-2xl mb-2">{{ enterprise.name }} - {{ locate }} - {{ sensor }}</p>
+            <p class="font-rale text-center text-black text-xl">Conexión: <span id="sensor"
+                    class="font-rale font-bold text-green-500"></span></p>
         </div>
     </section>
 
-    <section class="mt-12 mx-12">
-        <div class="flex gap-10 flex-shrink-1">
-            
-            
+    <section class="container mx-auto mt-12">
+        <div class="flex gap-10 justify-between flex-wrap">
+
+            <!-- Volts Monofasicos -->
+            <a href="#" class="bg-white shadow-lg rounded-lg overflow-hidden w-60">
+                <div class="p-6">
+                    <h5 class="text-xs font-medium mb-2">Voltage L1 - N</h5>
+                    <p class="text-right font-exo font-bold text-2xl" id="Va">000.00 V</p>
+                </div>
+            </a>
+
+            <a href="#" class="bg-white shadow-lg rounded-lg overflow-hidden w-60">
+                <div class="p-6">
+                    <h5 class="text-xs font-medium mb-2">Voltage L1 - N</h5>
+                    <p class="text-right font-exo font-bold text-2xl" id="Vb">000.00 V</p>
+                </div>
+            </a>
+
+            <a href="#" class="bg-white shadow-lg rounded-lg overflow-hidden w-60">
+                <div class="p-6">
+                    <h5 class="text-xs font-medium mb-2">Voltage L1 - N</h5>
+                    <p class="text-right font-exo font-bold text-2xl" id="Vc">000.00 V</p>
+                </div>
+            </a>
+
+            <!-- Volts Trifasicos -->
+            <a href="#" class="bg-white shadow-lg rounded-lg overflow-hidden w-60">
+                <div class="p-6">
+                    <h5 class="text-xs font-medium mb-2">Voltage L1 - L2</h5>
+                    <p class="text-right font-exo font-bold text-2xl" id="Vab">000.00 V</p>
+                </div>
+            </a>
+
+            <a href="#" class="bg-white shadow-lg rounded-lg overflow-hidden w-60">
+                <div class="p-6">
+                    <h5 class="text-xs font-medium mb-2">Voltage L1 - L3</h5>
+                    <p class="text-right font-exo font-bold text-2xl" id="Vca">000.00 V</p>
+                </div>
+            </a>
+
+            <a href="#" class="bg-white shadow-lg rounded-lg overflow-hidden w-60">
+                <div class="p-6">
+                    <h5 class="text-xs font-medium mb-2">Voltage L2 - L3</h5>
+                    <p class="text-right font-exo font-bold text-2xl" id="Vbc">000.00 V</p>
+                </div>
+            </a>
+
+            <!-- Corrientes -->
+            <a href="#" class="bg-white shadow-lg rounded-lg overflow-hidden w-60">
+                <div class="p-6">
+                    <h5 class="text-xs font-medium mb-2">Corriente L1</h5>
+                    <p class="text-right font-exo font-bold text-2xl" id="Ia">000.00 A</p>
+                </div>
+            </a>
+
+            <a href="#" class="bg-white shadow-lg rounded-lg overflow-hidden w-60">
+                <div class="p-6">
+                    <h5 class="text-xs font-medium mb-2">Corriente L2</h5>
+                    <p class="text-right font-exo font-bold text-2xl" id="Ib">000.00 A</p>
+                </div>
+            </a>
+
+            <a href="#" class="bg-white shadow-lg rounded-lg overflow-hidden w-60">
+                <div class="p-6">
+                    <h5 class="text-xs font-medium mb-2">Corriente L3</h5>
+                    <p class="text-right font-exo font-bold text-2xl" id="Ic">000.00 A</p>
+                </div>
+            </a>
+
+            <!-- Potencias -->
+            <a href="#" class="bg-white shadow-lg rounded-lg overflow-hidden w-60">
+                <div class="p-6">
+                    <h5 class="text-xs font-medium mb-2">Potencia L1</h5>
+                    <p class="text-right font-exo font-bold text-2xl" id="Pa">000.00 Kw</p>
+                </div>
+            </a>
+
+            <a href="#" class="bg-white shadow-lg rounded-lg overflow-hidden w-60">
+                <div class="p-6">
+                    <h5 class="text-xs font-medium mb-2">Potencia L2</h5>
+                    <p class="text-right font-exo font-bold text-2xl" id="Pb">000.00 Kw</p>
+                </div>
+            </a>
+
+            <a href="#" class="bg-white shadow-lg rounded-lg overflow-hidden w-60">
+                <div class="p-6">
+                    <h5 class="text-xs font-medium mb-2">Potencia L3</h5>
+                    <p class="text-right font-exo font-bold text-2xl" id="Pc">000.00 Kw</p>
+                </div>
+            </a>
+
+            <!-- Otros -->
+            <a href="#" class="bg-white shadow-lg rounded-lg overflow-hidden w-60">
+                <div class="p-6">
+                    <h5 class="text-xs font-medium mb-2">Energía</h5>
+                    <p class="text-right font-exo font-bold text-2xl" id="Energy">000.00 Kw/h</p>
+                </div>
+            </a>
+
+            <a href="#" class="bg-white shadow-lg rounded-lg overflow-hidden w-60">
+                <div class="p-6">
+                    <h5 class="text-xs font-medium mb-2">Factor de potencia</h5>
+                    <p class="text-right font-exo font-bold text-2xl" id="Fp">000.00</p>
+                </div>
+            </a>
+
+            <a href="#" class="bg-white shadow-lg rounded-lg overflow-hidden w-60">
+                <div class="p-6">
+                    <h5 class="text-xs font-medium mb-2">Frecuencia</h5>
+                    <p class="text-right font-exo font-bold text-2xl" id="Hz">000.00 Hz</p>
+                </div>
+            </a>
+
+
         </div>
     </section>
+
+    <div class="hidden" data-var="{{ topic }}" id="data_topic"></div>
 </main>
+
 
 {% include 'base/footer.html' %}
 

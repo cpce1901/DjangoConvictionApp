@@ -7,6 +7,9 @@ class SensorsManager(models.Manager):
     def get_by_locate(self, slug_located):
         return self.filter(located__slug=slug_located)
     
+    def get_by_code(self, code):
+        return self.get(code=code)
+    
 
 class LocatesManager(models.Manager):
        

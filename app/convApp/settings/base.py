@@ -8,6 +8,12 @@ DB_PASS = secret.get("DB_PASS")
 DB_HOST = secret.get("DB_HOST")
 DB_PORT = secret.get("DB_PORT")
 
+MQTT_BROKER = secret.get("MQTT_BROKER")
+MQTT_PORT = secret.get("MQTT_PORT")
+MQTT_USERNAME = secret.get("MQTT_USERNAME")
+MQTT_PASSWORD = secret.get("MQTT_PASSWORD")
+MQTT_ID = secret.get("MQTT_ID")
+
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = 'django-insecure-3^58wm2iasw(fc_r+zghc=y$+$ird*m^v_t7z3&q3u+6_4_)5o'
@@ -45,7 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
+
     # HTMX
     'django_htmx.middleware.HtmxMiddleware',
 ]

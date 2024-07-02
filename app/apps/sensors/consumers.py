@@ -1,40 +1,46 @@
 import asyncio
-from channels.consumer import AsyncConsumer
-from channels.exceptions import StopConsumer
-from asyncio_mqtt import Client, MqttError
+import json
+from channels.generic.websocket import AsyncWebsocketConsumer
+from aiomqtt import Client, MqttError
+from django.conf import settings
+from urllib.parse import unquote
 
-class MQTTConsumer(AsyncConsumer):
+
+class MQTTConsumer(AsyncWebsocketConsumer):
+
     async def connect(self):
-        self.mqtt_client = Client("broker.hivemq.com")  # Cambie esto por su broker MQTT
-        self.should_run = True
-        asyncio.create_task(self.mqtt_loop())
+        await self.accept()
+        self.mqtt_task = asyncio.create_task(self.mqtt_listener())
 
-    async def mqtt_loop(self):
-        while self.should_run:
-            try:
-                async with self.mqtt_client as client:
-                    await client.subscribe("your/topic")
-                    async for message in client.messages:
-                        await self.handle_mqtt_message(message)
-            except MqttError as error:
-                print(f'MQTT error: {error}')
-                await asyncio.sleep(5)  # Espera antes de intentar reconectar
+    async def mqtt_listener(self):
+        try:
+            topic = self.scope['url_route']['kwargs']['topic']
+            topic = str(topic).replace("-", "/")
+            print(topic)
 
-    async def handle_mqtt_message(self, message):
-        # Procesa el mensaje MQTT aquí
-        print(f"Received message on topic {message.topic}: {message.payload}")
-        # Puedes enviar el mensaje a través de WebSocket si es necesario
-        await self.send({
-            "type": "websocket.send",
-            "text": message.payload.decode()
-        })
+            async with Client(
+                hostname=settings.MQTT_BROKER, 
+                port=int(settings.MQTT_PORT), 
+                username=settings.MQTT_USERNAME, 
+                password=settings.MQTT_PASSWORD, 
+                identifier=settings.MQTT_ID
+                ) as client:
+
+                await client.subscribe(topic)
+                async for message in client.messages:
+                    payload = message.payload.decode()
+                    #print(f"Received MQTT message: {payload}")
+                    await self.send(text_data=json.dumps({
+                        'data_mqtt': payload
+                    }))
+        except MqttError as e:
+            print(f"MQTT Error: {e}")
+        except Exception as e:
+            print(f"Unexpected error: {e}")
+        
 
     async def disconnect(self, close_code):
-        self.should_run = False
-        await self.mqtt_client.disconnect()
-        raise StopConsumer()
+        if hasattr(self, 'mqtt_task'):
+            self.mqtt_task.cancel()
+        print("WebSocket desconectado")
 
-    async def receive(self, text_data):
-        # Maneja los mensajes recibidos del WebSocket
-        # Por ejemplo, publica en un tema MQTT
-        await self.mqtt_client.publish("your/publish/topic", text_data)

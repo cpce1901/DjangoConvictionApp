@@ -1,10 +1,8 @@
-from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.db.models import Count
-from django.conf import settings
 from .models import Sensor, Located
+from urllib.parse import quote
 import json
 
 
@@ -45,10 +43,11 @@ class LecturesView(LoginRequiredMixin, TemplateView):
         user = self.request.user
         slug_locate = self.kwargs["slug"]
         code_sensor = self.kwargs["code"]
-        
         locate = Located.objects.get_by_slug(slug_locate)
+        sensor = Sensor.objects.get_by_code(code_sensor)
 
+        context['topic'] = json.dumps({"topic": str(sensor.topic).replace("/", "-")})
         context['locate'] = locate
-        context['sensor'] = code_sensor
+        context['sensor'] = sensor.code
         context['enterprise'] = user.enterprise
         return context

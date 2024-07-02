@@ -38,7 +38,7 @@ class LocatedAdmin(admin.ModelAdmin):
 
 @admin.register(Sensor)
 class SensorAdmin(admin.ModelAdmin):
-    list_display = ('display_enterprise', 'display_enterprise_locate', 'code', 'display_sensor_model')
+    list_display = ('display_enterprise', 'display_enterprise_locate', 'code', 'display_sensor_model', 'topic')
     readonly_fields = ('code', )
     list_filter = ('located__name',)
     search_fields = ('located__enterprise__name', )
