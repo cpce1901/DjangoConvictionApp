@@ -50,4 +50,5 @@ class LecturesView(LoginRequiredMixin, TemplateView):
         context['locate'] = locate
         context['sensor'] = sensor.code
         context['enterprise'] = user.enterprise
+        context['slug_locate'] = slug_locate
         return context

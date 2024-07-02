@@ -7,16 +7,19 @@ from urllib.parse import unquote
 
 
 class MQTTConsumer(AsyncWebsocketConsumer):
-
+    first_message = False
+    
     async def connect(self):
         await self.accept()
+        await self.send(text_data=json.dumps({
+            'is_loading': False
+        }))
         self.mqtt_task = asyncio.create_task(self.mqtt_listener())
 
     async def mqtt_listener(self):
         try:
             topic = self.scope['url_route']['kwargs']['topic']
             topic = str(topic).replace("-", "/")
-            print(topic)
 
             async with Client(
                 hostname=settings.MQTT_BROKER, 
@@ -28,6 +31,11 @@ class MQTTConsumer(AsyncWebsocketConsumer):
 
                 await client.subscribe(topic)
                 async for message in client.messages:
+                    if not self.first_message:
+                        self.first_message = True
+                        await self.send(text_data=json.dumps({
+                            'is_loading': True
+                        }))
                     payload = message.payload.decode()
                     #print(f"Received MQTT message: {payload}")
                     await self.send(text_data=json.dumps({
