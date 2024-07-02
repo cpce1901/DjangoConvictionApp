@@ -16,7 +16,7 @@ def review_lecture_for_alert(sender, instance, created, **kwargs):
     if created:
         instance.code = generate_code(
             str(instance.located.enterprise.name),
-            str(instance.located.place),
+            str(instance.located.name),
             instance.pk
         )
         instance.save()

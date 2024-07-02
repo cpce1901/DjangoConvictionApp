@@ -12,7 +12,7 @@ class DeviceAdmin(admin.ModelAdmin):
 
 @admin.register(Located)
 class LocatedAdmin(admin.ModelAdmin):
-    list_display = ('display_enterprise', 'name', 'display_sensors')
+    list_display = ('display_enterprise', 'slug','name', 'display_sensors')
     search_fields = ('enterprise__name', 'name')
     list_filter = ('enterprise__name', )
 

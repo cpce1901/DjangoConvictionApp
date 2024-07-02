@@ -663,6 +663,11 @@ video {
   margin-right: auto;
 }
 
+.mx-12{
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
 .mt-\[0\.3rem\]{
   margin-top: 0.3rem;
 }
@@ -677,6 +682,18 @@ video {
 
 .mt-12{
   margin-top: 3rem;
+}
+
+.mb-4{
+  margin-bottom: 1rem;
+}
+
+.mt-2{
+  margin-top: 0.5rem;
+}
+
+.mt-4{
+  margin-top: 1rem;
 }
 
 .block{
@@ -727,6 +744,27 @@ video {
   height: 12rem;
 }
 
+.h-svh{
+  height: 100svh;
+}
+
+.h-max{
+  height: -moz-max-content;
+  height: max-content;
+}
+
+.h-40{
+  height: 10rem;
+}
+
+.h-60{
+  height: 15rem;
+}
+
+.h-64{
+  height: 16rem;
+}
+
 .w-10\/12{
   width: 83.333333%;
 }
@@ -749,6 +787,10 @@ video {
 
 .w-full{
   width: 100%;
+}
+
+.flex-grow{
+  flex-grow: 1;
 }
 
 .-translate-x-1\/2{
@@ -833,6 +875,12 @@ video {
 
 .gap-6{
   gap: 1.5rem;
+}
+
+.space-x-4 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .self-center{
@@ -1027,6 +1075,11 @@ video {
   padding-bottom: 2.5rem;
 }
 
+.px-12{
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
 .pt-32{
   padding-top: 8rem;
 }
@@ -1073,6 +1126,16 @@ video {
 .text-xl{
   font-size: 1.25rem;
   line-height: 1.75rem;
+}
+
+.text-2xl{
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.text-sm{
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 .font-bold{
@@ -1284,6 +1347,15 @@ video {
   color: rgb(244 63 94 / var(--tw-text-opacity));
 }
 
+.hover\:text-green-600:hover{
+  --tw-text-opacity: 1;
+  color: rgb(22 163 74 / var(--tw-text-opacity));
+}
+
+.hover\:underline:hover{
+  text-decoration-line: underline;
+}
+
 .hover\:outline-rose-500:hover{
   outline-color: #f43f5e;
 }
@@ -1313,6 +1385,14 @@ video {
 }
 
 @media (min-width: 768px){
+  .md\:mb-0{
+    margin-bottom: 0px;
+  }
+
+  .md\:mt-0{
+    margin-top: 0px;
+  }
+
   .md\:h-auto{
     height: auto;
   }
@@ -1331,6 +1411,10 @@ video {
 
   .md\:grid-cols-3{
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .md\:flex-row{
+    flex-direction: row;
   }
 
   .md\:gap-10{
@@ -1406,5 +1490,10 @@ video {
   .xl\:text-6xl{
     font-size: 3.75rem;
     line-height: 1;
+  }
+
+  .xl\:text-4xl{
+    font-size: 2.25rem;
+    line-height: 2.5rem;
   }
 }

@@ -31,10 +31,11 @@ LOCAL_APPS = [
 ]
 
 THIRTY_APPS = [
-
+    'daphne',
+    'django_htmx',
 ]
 
-INSTALLED_APPS = BASE_APPS + LOCAL_APPS + THIRTY_APPS
+INSTALLED_APPS = THIRTY_APPS + BASE_APPS + LOCAL_APPS 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -44,6 +45,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    # HTMX
+    'django_htmx.middleware.HtmxMiddleware',
 ]
 
 ROOT_URLCONF = 'convApp.urls'
@@ -84,7 +88,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Santiago'
 
 USE_I18N = True
 
@@ -95,3 +99,12 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.User'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}

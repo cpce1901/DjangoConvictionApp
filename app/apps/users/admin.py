@@ -51,8 +51,11 @@ class UserAdmin(admin.ModelAdmin):
         return  obj.enterprise.name if obj.enterprise else ""
 
     def save_model(self, request, obj, form, change):
-        # Hash the password if it is being set/changed
-        if form.cleaned_data['password']:
+        if change:
+            existing_password = User.objects.get(pk=obj.pk).password
+            if form.cleaned_data['password'] != existing_password:
+                obj.set_password(form.cleaned_data['password'])
+        else:
             obj.set_password(form.cleaned_data['password'])
         super().save_model(request, obj, form, change)
 

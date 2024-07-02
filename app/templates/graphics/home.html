@@ -19,18 +19,20 @@ Dashboard - DEMO | Cloud Manager | Conviction
 
 {% include 'base/nav.html' %}
 
-<main class="container-fluid mx-auto">
+<main class="h-screen container mx-auto py-10 px-4 lg:px-0">
 
-    <section class="absolute left-1/2 top-[10%] transform -translate-x-1/2">
+    <section class="flex justify-center pt-10">
         <div>
-            <h1 class="text-4xl text-center text-black text-exo xl:text-6xl">clou<span
-                    class="text-green-500 text-rale">DM</span>anager - Demo</h1>
+            <h1 class="text-center text-black font-exo xl:text-4xl">
+                clou<span class="text-green-500 font-rale">DM</span>anager - Demo
+            </h1>
+            <p class="text-center text-black text-xl">{{ enterprise.name }}</p>
         </div>
     </section>
 
     
-
-
 </main>
+
+{% include 'base/footer.html' %}
 
 {% endblock content %}

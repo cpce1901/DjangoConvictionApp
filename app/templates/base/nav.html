@@ -15,7 +15,7 @@
 
                     <!-- Boton responsive -->
                     <input type="checkbox" name="hamburger" id="hamburger" class="peer" hidden>
-
+    
                     <label for="hamburger"
                         class="peer-checked:hamburger block z-20 cursor-pointer transition p-1.5 hover:bg-gray-200 rounded">
                         <div class="h-0.5 w-[18px] bg-white transition"></div>
@@ -23,14 +23,13 @@
                         <div class="mt-[0.3rem] h-0.5 w-[18px] bg-white transition"></div>
                     </label>
 
-
                     <!-- Cuerpo de los enlaces -->
                     <div
                         class="z-20 w-8/12 md:w-4/12 lg:2/12 xl:w-2/12 bg-white flex flex-col justify-between fixed inset-0 translate-x-[-100%] shadow-lg peer-checked:translate-x-0 peer-checked:duration-500 transition">
 
                         <!-- Enlaces -->
                         <div class="px-6 pt-32 flex flex-col gap-3 ">
-                            <a href="#" title="Navegar a electricista"
+                            <a href="{% url 'graphics_app:home' %}" title="Navegar a electricista"
                                 class="{% if request.path == '/' %}md:font-bold font-medium{% else %}md:font-light hover:font-medium font-light{% endif %} tracking-wide cursor-pointer px-3 py-2 rounded  text-lg text-slate-800   transition-all duration-300 ">Dashboard</a>
                             <a href="{% url 'sensors_app:locates' %}" title="Navegar a nosotros"
                                 class="{% if request.path == '/nosotros/' %}md:font-bold font-medium{% else %}md:font-light hover:font-medium font-light{% endif %} tracking-wide cursor-pointer px-3 py-2 rounded  text-lg text-slate-800   transition-all duration-300">Sensores</a>
