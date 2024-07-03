@@ -91,5 +91,56 @@ class RangeSensorsForm(forms.Form):
         self.fields['time_2'].initial = datetime.now().time()
 
 
+class SelectTopicForm(forms.Form):
+    vars_choices = [
+            ("Va", "Voltaje L1"),
+            ("Vb", "Voltaje L2"),
+            ("Vc", "Voltaje L3"),
+            ("Vab", "Voltaje L1 - L2"),
+            ("Vbc", "Voltaje L2 - L3"),
+            ("Vca", "Voltaje L3 - L1"),
+            ("Ia", "Corriente L1"),
+            ("Ib", "Corriente L2"),
+            ("Ic", "Corriente L3"),
+            ("Pa", "Potencia L1"),
+            ("Pb", "Potencia L2"),
+            ("Pc", "Potencia L3"),
+            ("energy", "Energía"),
+            ("FP", "Factor de Potencia"),
+            ("Hz", "Frecuencia"),
+        ]
+    
+    topic = forms.ChoiceField(
+            label="Grupo de variables",
+            choices=vars_choices,
+            widget=forms.Select(
+                attrs={
+                    "class": "w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500 transition duration-200",
+                }
+            ),
+        )
 
 
+    def __init__(self, *args, **kwargs):
+        sensor = kwargs.pop('sensor', None)
+        start_datetime = kwargs.pop('start_datetime', None)
+        end_datetime = kwargs.pop('end_datetime', None)
+        super().__init__(*args, **kwargs)
+
+        
+        self.fields["sensor"] = forms.CharField(
+            initial=sensor,
+            widget=forms.HiddenInput()
+        )
+
+        self.fields["start_datetime"] = forms.CharField(
+            initial=str(start_datetime),
+            widget=forms.HiddenInput()
+        )
+
+        self.fields["end_datetime"] = forms.CharField(
+            initial=end_datetime,
+            widget=forms.HiddenInput()
+        )
+
+        

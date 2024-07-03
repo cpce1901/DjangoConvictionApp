@@ -5,16 +5,47 @@
 Gráficos - DEMO | Cloud Manager | Conviction
 {% endblock title %}
 
-{% block script %}
-{% endblock script %}
-
 {% block content %}
 
-{% include 'base/nav.html' %}
+<main class="min-h-screen bg-gray-100 pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+        <!-- Título de la página -->
+        <h1 class="text-3xl font-bold text-gray-900 mb-8 text-center">Gráficos de Sensores {{ enterprise }}</h1>
+        
+        <!-- Sección del formulario -->
+        <section class="bg-white shadow-md rounded-lg p-6 mb-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">{{ locate }} - {{ sensor }} - {{ code }}</h2>
+            <h3 class="text-base font-semibold text-gray-800 mb-4">Desde: {{ start_datetime }} - Hasta: {{ end_datetime }}</h3>
+            <form class="space-y-4" hx-get="graficos-results/" hx-target="#result" hx-include="[name='sensor'], [name='start_datetime'], [name='end_datetime']">
+                
+                    <div>
+                        <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                            {{ form.topic.label }}
+                        </label>
+                        {{ form.topic }}
+                        <div>{{ form.sensor }}</div>
+                        <div>{{ form.start_datetime }}</div>
+                        <div>{{ form.end_datetime}}</div>
+                    </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300">
+                    Generar Gráfico
+                </button>
+            </form>
+        </section>
 
-<main class="flex items-center justify-center min-h-screen bg-gray-200">
-    {{ results }}
+        <!-- Sección del gráfico -->
+        <section class="bg-white shadow-md rounded-lg p-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Resultados</h2>
+            <div id="result" class="w-full h-auto">
+                {% include 'graphics/result_htmx.html' %}
+            </div>
+        </section>
+
+        <section id="data2" class="container text-right my-8 px-12">
+            <a href="{% url 'graphics_app:range' %}"
+                class="font-exo text-xl text-blue-800 transition-all hover:text-[135%] hover:text-blue-700">Volver</a>
+        </section>
+    </div>
 </main>
-{% include 'base/footer.html' %}
 
 {% endblock content %}

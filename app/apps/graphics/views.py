@@ -1,3 +1,5 @@
+import pandas as pd
+import plotly.express as px
 from datetime import datetime
 from django.views.generic import TemplateView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -5,8 +7,9 @@ from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.utils.dateparse import parse_datetime
-from .forms import RangeSensorsForm
+from .forms import RangeSensorsForm, SelectTopicForm
 from apps.lectures.models import Measures
+from apps.sensors.models import Located, Sensor
 
 
 class HomeView(LoginRequiredMixin, TemplateView):
@@ -52,10 +55,25 @@ class RangeGraphicView(LoginRequiredMixin, FormView):
         return HttpResponseRedirect(url)
     
 
-class RangeGraphicResumeView(LoginRequiredMixin, TemplateView):
+class RangeGraphicResumeView(LoginRequiredMixin, FormView):
     template_name = 'graphics/range_result.html'
     login_url = reverse_lazy("users_app:login")
+    form_class = SelectTopicForm
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+
+        locate = self.request.GET.get('locate')
+        sensor = self.request.GET.get('sensor')
+        start_datetime = self.request.GET.get('start_datetime')
+        end_datetime = self.request.GET.get('end_datetime')
+
+        kwargs['sensor'] = sensor
+        kwargs['start_datetime'] = start_datetime
+        kwargs['end_datetime'] = end_datetime
+        return kwargs
+
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
@@ -63,14 +81,15 @@ class RangeGraphicResumeView(LoginRequiredMixin, TemplateView):
         sensor = self.request.GET.get('sensor')
         start_datetime = parse_datetime(self.request.GET.get('start_datetime'))
         end_datetime = parse_datetime(self.request.GET.get('end_datetime'))
+        sensor = Sensor.objects.get_by_code(sensor)
 
-        measures = Measures.objects.filter_by_sensor_and_date_range(
-            sensor_code=sensor,
-            start_datetime=start_datetime,
-            end_datetime=end_datetime
-        )
+        context['enterprise'] = sensor.located.enterprise.name
+        context['locate'] = sensor.located.name
+        context['sensor'] = sensor.detail
+        context['code'] = sensor.code
+        context['start_datetime'] = start_datetime
+        context['end_datetime'] = end_datetime
 
-        context['results'] = measures
 
         return context
     

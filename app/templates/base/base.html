@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="es" class="relative min-h-[100%]">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,13 +12,17 @@
     <script src="{% static 'js/toogle.js' %}"></script>
     {% block script %}{% endblock script %}
 </head>
-<body class="m-0">
 
-    
-    {% block content %}
-        
-    {% endblock content %}
-        
-    
+<body class="flex flex-col min-h-screen bg-gray-100">
+    {% include 'base/nav.html' %}
+
+    <main class="flex-grow">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include 'base/footer.html' %}
+
+    {% block extra_scripts %}{% endblock %}
 </body>
+
 </html>

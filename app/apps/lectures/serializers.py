@@ -17,7 +17,6 @@ class LectureSerializer(serializers.ModelSerializer):
             code = str(data['sen']).replace('-', '/')
             topic = f'{code}/'
             sensor = Sensor.objects.get(topic=topic)
-            print(sensor)
             data['sensor'] = sensor
         except Sensor.DoesNotExist:
             raise serializers.ValidationError("No se encontró un sensor con el código proporcionado.")
