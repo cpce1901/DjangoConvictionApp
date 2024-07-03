@@ -685,6 +685,22 @@ video {
   margin-top: 0.3rem;
 }
 
+.mt-40{
+  margin-top: 10rem;
+}
+
+.mb-32{
+  margin-bottom: 8rem;
+}
+
+.mb-10{
+  margin-bottom: 2.5rem;
+}
+
+.mb-28{
+  margin-bottom: 7rem;
+}
+
 .block{
   display: block;
 }
@@ -1025,12 +1041,34 @@ video {
   padding-bottom: 2rem;
 }
 
+.py-40{
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+}
+
+.py-32{
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
 .pt-28{
   padding-top: 7rem;
 }
 
 .pt-32{
   padding-top: 8rem;
+}
+
+.pb-8{
+  padding-bottom: 2rem;
+}
+
+.pb-40{
+  padding-bottom: 10rem;
+}
+
+.pt-20{
+  padding-top: 5rem;
 }
 
 .text-center{
