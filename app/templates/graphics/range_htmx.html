@@ -1,0 +1,6 @@
+
+<option value="0">---</option>
+{% for sensor in sensors %}
+    <option value="{{ sensor.id }}">{{ sensor.detail }}</option>
+{% endfor %}
+

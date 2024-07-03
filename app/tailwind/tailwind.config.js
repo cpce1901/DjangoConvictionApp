@@ -2,7 +2,8 @@
 module.exports = {
   content: [
     '../templates/**/*.html',
-    '../apps/users/form.py',
+    '../apps/users/forms.py',
+    '../apps/graphics/forms.py'
   ],
   theme: {
     extend: {

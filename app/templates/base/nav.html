@@ -33,7 +33,7 @@
                                 class="{% if request.path == '/' %}md:font-bold font-medium{% else %}md:font-light hover:font-medium font-light{% endif %} tracking-wide cursor-pointer px-3 py-2 rounded  text-lg text-slate-800   transition-all duration-300 ">Dashboard</a>
                             <a href="{% url 'sensors_app:locates' %}" title="Navegar a nosotros"
                                 class="{% if 'lugares' in request.path %}md:font-bold font-medium{% else %}md:font-light hover:font-medium font-light{% endif %} tracking-wide cursor-pointer px-3 py-2 rounded  text-lg text-slate-800   transition-all duration-300">Sensores</a>
-                            <a href="#" title="Navegar a servicios"
+                            <a href="{% url 'graphics_app:range' %}" title="Navegar a servicios"
                                 class="{% if 'graficos' in request.path %}md:font-bold font-medium{% else %}md:font-light hover:font-medium font-light{% endif %} tracking-wide cursor-pointer px-3 py-2 rounded  text-lg text-slate-800   transition-all duration-300">Gráficos</a>
                             <a href="#" title="Navegar a contacto"
                                 class="{% if request.path == '/contacto/' %}md:font-bold font-medium{% else %} hover:font-medium font-light{% endif %} tracking-wide cursor-pointer px-3 py-2 rounded  text-lg text-slate-800   transition-all duration-300">Alertas</a>

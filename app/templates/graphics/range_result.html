@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}
+Gráficos - DEMO | Cloud Manager | Conviction
+{% endblock title %}
+
+{% block script %}
+{% endblock script %}
+
+{% block content %}
+
+{% include 'base/nav.html' %}
+
+<main class="flex items-center justify-center min-h-screen bg-gray-200">
+    {{ results }}
+</main>
+{% include 'base/footer.html' %}
+
+{% endblock content %}

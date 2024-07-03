@@ -22,6 +22,7 @@ url_BASE = [
     path('', include('apps.users.urls')),
     path('', include('apps.graphics.urls')),
     path('', include('apps.sensors.urls')),
+    path('', include('apps.lectures.urls')),
 ]
 
 

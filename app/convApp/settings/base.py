@@ -39,6 +39,7 @@ LOCAL_APPS = [
 THIRTY_APPS = [
     'daphne',
     'django_htmx',
+    'rest_framework',
 ]
 
 INSTALLED_APPS = THIRTY_APPS + BASE_APPS + LOCAL_APPS 
@@ -113,4 +114,13 @@ CHANNEL_LAYERS = {
             "hosts": [("127.0.0.1", 6379)],
         },
     },
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+    )
 }

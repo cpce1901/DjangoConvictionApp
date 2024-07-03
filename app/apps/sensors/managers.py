@@ -4,6 +4,9 @@ class SensorsManager(models.Manager):
     def full(self):
         return self.all()
     
+    def get_by_id(self, id):
+        return self.filter(located__id=id)
+    
     def get_by_locate(self, slug_located):
         return self.filter(located__slug=slug_located)
     
